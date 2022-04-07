@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+        {% include "superior/barra.html" %}
+        <h1> Hola, esta es nuestra primera plantilla. </h1>
+
+        {% comment %} no temas muchachon!
+        ignora esta parte
+        {% endcomment %}
+
+        {% if nombre_persona == 'Alvaro' %}
+        <p>El curso lo imparte el profesor titular</p>
+        {% else %}
+        <p>El curso lo imparte el profesor suplente </p>
+        {% endif %}
+
+        <p>El nombre del profesor es: {{nombre_persona}} {{apellido_persona}}</p>
+        <!--para modificar las propiedades del texto se debe ingresar la propiedad al final -->
+        <!--en lugar del . tambien se puede usar filtro con el simbolo |  -->
+        <p>El nombre del profesor es: {{nombre_persona.upper}} {{apellido_persona|upper}}</p>
+        <p>Estamos viendo el tema de las plantillas al dia: {{momento_actual}}</p>
+        <!--podemos modificar la propiedad de la variable que estamos invocando por 
+            ejemplo momento_actual.day -->
+        <p>Estamos viendo el tema de las plantillas al dia: {{momento_actual.day}} / 
+            {{momento_actual.month}} / {{momento_actual.year}}, {{momento_actual.time}}</p>
+        <p>{{temas}}</p>
+        <!--si queremos solo invocar un elemento de la lista tenemos que modificar la forma 
+            como invocamos la variable temas recordando que las listas comienzan desde 0-->
+        <p>{{temas.1}}</p>
+        <p><strong>Temas del curso</strong></p>
+        <p>
+            <ul>
+            {% if temas %}
+                {% for el_tema in temas %}
+
+                    <li>{{el_tema|first|lower}}</li>
+                    <!-- en estos casos tambien se puede aplicar filtros, recordar usar el simbolo |
+                    estos filtros se pueden encadenar-->             
+
+                {% endfor %}
+            {% else %}
+                <p>No hay elementos que mostrar</p>
+            {% endif %}
+            </ul>
+        </p>
+    </body>
+</html>
